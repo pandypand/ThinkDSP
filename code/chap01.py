@@ -77,7 +77,8 @@ mix
 
 # ### Waves
 # 
-# A Signal represents a mathematical function defined for all values of time.  If you evaluate a signal at a sequence of equally-spaced times, the result is a Wave.  `framerate` is the number of samples per second.
+# A Signal represents a mathematical function defined for all values of time.  If you evaluate a signal at a sequence
+#  of equally-spaced times, the result is a Wave.  `framerate` is the number of samples per second.
 
 # In[7]:
 
@@ -104,7 +105,8 @@ audio
 wave.make_audio()
 
 
-# The `ys` attribute is a NumPy array that contains the values from the signal.  The interval between samples is the inverse of the framerate.
+# The `ys` attribute is a NumPy array that contains the values from the signal.  The interval between samples is the
+# inverse of the framerate.
 
 # In[10]:
 
@@ -163,12 +165,13 @@ wave.write('temp.wav')
 thinkdsp.play_wave(filename='temp.wav', player='aplay')
 
 
-# `read_wave` reads WAV files.  The WAV examples in the book are from freesound.org.  In the contributors section of the book, I list and thank the people who uploaded the sounds I use.
+# `read_wave` reads WAV files.  The WAV examples in the book are from freesound.org.  In the contributors section of
+# the book, I list and thank the people who uploaded the sounds I use.
 
 # In[21]:
 
 
-wave = thinkdsp.read_wave('92002__jcveliz__violin-origional.wav')
+wave = thinkdsp.read_wave('code/92002__jcveliz__violin-origional.wav')
 
 
 # In[22]:
@@ -177,7 +180,9 @@ wave = thinkdsp.read_wave('92002__jcveliz__violin-origional.wav')
 wave.make_audio()
 
 
-# I pulled out a segment of this recording where the pitch is constant.  When we plot the segment, we can't see the waveform clearly, but we can see the "envelope", which tracks the change in amplitude during the segment.
+# I pulled out a segment of this recording where the pitch is constant.
+# When we plot the segment, we can't see the waveform clearly,
+# but we can see the "envelope", which tracks the change in amplitude during the segment.
 
 # In[23]:
 
@@ -286,9 +291,12 @@ filtered.make_audio()
 
 
 # The original sounds more complex, with some high-frequency components that sound buzzy.
-# The filtered version sounds more like a pure tone, with a more muffled quality.  The cutoff frequency I chose, 3000 Hz, is similar to the quality of a telephone line, so this example simulates the sound of a violin recording played over a telephone.
+# The filtered version sounds more like a pure tone, with a more muffled quality.
+# The cutoff frequency I chose, 3000 Hz, is similar to the quality of a telephone line,
+# so this example simulates the sound of a violin recording played over a telephone.
 
-# **Exercise 1:** Run the code in the following cells to create a `Signal` with two frequency components, and then create a `Wave` that contains a half-second sample from the `Signal`.
+# **Exercise 1:** Run the code in the following cells to create a `Signal` with two frequency components,
+# and then create a `Wave` that contains a half-second sample from the `Signal`.
 # 
 # Add code to compute and plot the `Spectrum` of this `Wave`.
 # 
@@ -308,6 +316,20 @@ mix.plot()
 
 wave = mix.make_wave(duration=0.5, start=0, framerate=11025)
 wave.plot()
+
+
+spectrum = wave.make_spectrum()
+spectrum.plot()
+thinkplot.config(xlabel='Frequency (Hz)')
+
+cos_sig_2 = thinkdsp.CosSignal(freq=880, amp=1, offset=0)
+mix = mix + cos_sig_2
+mix.plot()
+
+wave_2= mix.make_wave(duration=0.5, start=0, framerate=11025)
+spectrum = wave_2.make_spectrum()
+spectrum.plot()
+thinkplot.config(xlabel='Frequency (Hz)')
 
 
 # ### Interaction
@@ -344,7 +366,7 @@ def filter_wave(wave, start, duration, cutoff):
 # In[43]:
 
 
-wave = thinkdsp.read_wave('92002__jcveliz__violin-origional.wav')
+wave = thinkdsp.read_wave('code/92002__jcveliz__violin-origional.wav')
 interact(filter_wave, wave=fixed(wave), 
          start=(0, 5, 0.1), duration=(0, 5, 0.1), cutoff=(0, 10000, 100));
 

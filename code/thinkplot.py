@@ -237,10 +237,10 @@ def Plot(obj, ys=None, style='', **options):
 
     if ys is None:
         plt.plot(xs, style, **options)
-        plt.show()
+        #plt.show()
     else:
         plt.plot(xs, ys, style, **options)
-        plt.show()
+        #plt.show()
 
 
 def Vlines(xs, y1, y2, **options):
